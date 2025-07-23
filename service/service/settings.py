@@ -48,6 +48,10 @@ REST_FRAMEWORK = {
     ),
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # React frontend
+]
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
