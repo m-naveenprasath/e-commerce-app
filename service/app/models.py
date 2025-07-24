@@ -1,4 +1,5 @@
 # Create your models here.
+from PIL import Image
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -65,6 +66,21 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Save image first
+
+        if self.image:
+            img_path = self.image.path
+            try:
+                with Image.open(img_path) as img:
+                    if img.height > 800 or img.width > 800:
+                        output_size = (800, 800)
+                        img.thumbnail(output_size)
+                        img.save(img_path)
+            except Exception as e:
+                print(f"Error resizing image: {e}")
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

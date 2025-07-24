@@ -5,8 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 const PrivateRoute = ({ children }) => {
   const { user,loading } = useContext(AuthContext);
 
-  // Optional loading indicator
-  // if (user === null) return <div>Loading...</div>;
   if (loading) return <div>Loading...</div>; // ✅ Wait until loading is false
 
   return user ? children : <Navigate to="/login" />;
