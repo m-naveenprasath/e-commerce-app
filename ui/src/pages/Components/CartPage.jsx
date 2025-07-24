@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
-const CartPage = () => {
+const CartPage = ({ refreshSignal, setCartCount }) => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -9,6 +11,10 @@ const CartPage = () => {
     try {
       const res = await api.get("/carts/");
       const cartList = res.data;
+
+      const items = cartList.length > 0 ? cartList[0].items : [];
+      const count = items.reduce((acc, item) => acc + item.quantity, 0);
+      setCartCount(count);
 
       if (cartList.length > 0) {
         const items = cartList[0].items;
@@ -36,7 +42,7 @@ const CartPage = () => {
 
   useEffect(() => {
     fetchCartWithDetails();
-  }, []);
+  }, [refreshSignal]);
 
   const handleQuantityChange = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
@@ -137,7 +143,8 @@ const CartPage = () => {
 
         <button
           className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
-          onClick={() => alert("✅ Proceeding to Buy Now")}
+          onClick={() => navigate("/checkout")
+          }
         >
           🛒 Buy Now
         </button>

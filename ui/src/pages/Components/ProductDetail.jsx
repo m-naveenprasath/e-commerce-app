@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
 
-const ProductDetail = () => {
-  const { id } = useParams();
+const ProductDetail = ({ productId: propProductId, inModal = false, onCartUpdate = () => {} }) => {
+  const { id: routeId } = useParams(); // for route usage
+  const id = propProductId || routeId;
+
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -22,7 +24,7 @@ const ProductDetail = () => {
       }
     };
 
-    fetchProduct();
+    if (id) fetchProduct();
   }, [id]);
 
   const handleAddToCart = async () => {
@@ -32,6 +34,7 @@ const ProductDetail = () => {
         quantity,
       });
       alert("✅ Product added to cart!");
+      onCartUpdate(); // 👈 trigger cart refresh + count update
     } catch (err) {
       console.error("Failed to add to cart:", err);
       alert("❌ Something went wrong!");
@@ -42,24 +45,31 @@ const ProductDetail = () => {
   if (!product) return <div className="p-4">Product not found.</div>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className={`${inModal ? '' : 'max-w-5xl mx-auto'} p-6`}>
       <div className="grid md:grid-cols-2 gap-8">
         <img
-          src={product.image}
+          src={
+            product.image?.includes("http")
+              ? product.image
+              : "/no-image.png"
+          }
           alt={product.name}
-          className="w-full h-[400px] object-cover rounded-xl shadow"
+          className="w-full h-[400px] object-contain bg-white rounded-xl shadow"
         />
+
         <div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <p className="text-gray-700 mb-4">{product.description}</p>
-          <p className="text-xl font-semibold text-indigo-600 mb-4">₹{product.price}</p>
+          <p className="text-xl font-semibold text-indigo-600 mb-4">
+            ₹{product.price}
+          </p>
 
-          <label className="block mb-2">Quantity</label>
+          <label className="block mb-2 font-medium">Quantity</label>
           <input
             type="number"
             value={quantity}
             min="1"
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={(e) => setQuantity(Number(e.target.value))}
             className="w-20 px-2 py-1 border rounded mb-4"
           />
 

@@ -53,7 +53,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        read_only_fields = ['created_by']  # 👈 Important!
+        read_only_fields = ['created_by']  
 
 class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -102,6 +102,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Order

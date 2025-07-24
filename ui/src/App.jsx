@@ -12,17 +12,18 @@ import CategoryList from "./pages/Components/admin/CategoryList";
 import LandingPage from "./pages/Components/LandingPage";
 import ProductDetail from "./pages/Components/ProductDetail";
 import CartPage from "./pages/Components/CartPage";
+import PlaceOrderPage from "./pages/Components/PlaceOrderPage";
+import OrderList from "./pages/Components/OrderList";
 import Unauthorized from "./pages/Unauthorized";
-import PageNotFound from "./pages/PageNotFound"; 
+import PageNotFound from "./pages/PageNotFound";
 
-function Home() {
-  return <h2>Welcome to Ecommerce!</h2>;
-}
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/orders" element={<OrderList />} />
+
       <Route
         path="/"
         element={
@@ -47,6 +48,16 @@ function App() {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/checkout"
+        element={
+          <PrivateRoute>
+            <PlaceOrderPage />
+          </PrivateRoute>
+        }
+      />
+
 
       {/* Admin-only Routes */}
       <Route
