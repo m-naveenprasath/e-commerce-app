@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import { LogOut, LayoutDashboard, Package, PlusSquare, Tag, Menu } from "lucide-react";
 
 const AdminLayout = () => {

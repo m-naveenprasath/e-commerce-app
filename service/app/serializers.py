@@ -56,11 +56,35 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ['created_by']  # 👈 Important!
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
-
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'quantity']
+        fields = ['id', 'cart', 'product', 'quantity']
+        read_only_fields = ['cart']
+    def validate_quantity(self, value):
+        if value < 1:
+            raise serializers.ValidationError("Quantity must be at least 1.")
+        return value
+
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        user = request.user
+
+        # Get or create a Cart for the user
+        cart, _ = Cart.objects.get_or_create(user=user)
+        product = validated_data['product']
+        quantity = validated_data.get('quantity', 1)
+
+        # Update if product already in cart
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        if not created:
+            cart_item.quantity += quantity
+            cart_item.save()
+        else:
+            cart_item.quantity = quantity
+            cart_item.save()
+
+        return cart_item
 
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)

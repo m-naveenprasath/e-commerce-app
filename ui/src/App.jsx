@@ -3,12 +3,15 @@ import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import RoleBasedRoute from "./utils/RoleBasedRoute";
 
-import AdminLayout from "./pages/Components/AdminLayout";
-import Dashboard from "./pages/Components/Dashboard";
-import ProductList from "./pages/Components/ProductList";
-import CreateProductPage from "./pages/Components/CreateProductPage";
-import CreateCategory from "./pages/Components/CreateCategory";
-import CategoryList from "./pages/Components/CategoryList";
+import AdminLayout from "./pages/Components/admin/AdminLayout";
+import Dashboard from "./pages/Components/admin/Dashboard";
+import ProductList from "./pages/Components/admin/ProductList";
+import CreateProductPage from "./pages/Components/admin/CreateProductPage";
+import CreateCategory from "./pages/Components/admin/CreateCategory";
+import CategoryList from "./pages/Components/admin/CategoryList";
+import LandingPage from "./pages/Components/LandingPage";
+import ProductDetail from "./pages/Components/ProductDetail";
+import CartPage from "./pages/Components/CartPage";
 import Unauthorized from "./pages/Unauthorized";
 import PageNotFound from "./pages/PageNotFound"; 
 
@@ -24,7 +27,23 @@ function App() {
         path="/"
         element={
           <PrivateRoute>
-            <Home />
+            <LandingPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/products/:id"
+        element={
+          <PrivateRoute>
+            <ProductDetail />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <PrivateRoute>
+            <CartPage />
           </PrivateRoute>
         }
       />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../../services/api";
 import { Trash2, Pencil } from "lucide-react";
 import { Link } from "react-router-dom";
 

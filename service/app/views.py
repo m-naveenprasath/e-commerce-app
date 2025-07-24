@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from rest_framework.permissions import BasePermission
+from rest_framework.exceptions import PermissionDenied  # ✅ Add this at the top
 
 class IsAppAdmin(BasePermission):
     def has_permission(self, request, view):
@@ -67,3 +68,34 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAppAdmin]
+
+
+class AddToCartView(generics.CreateAPIView):
+    serializer_class = CartItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_serializer_context(self):
+        return {'request': self.request}
+
+    def perform_create(self, serializer):
+        if not self.request.user.is_customer:
+            raise PermissionDenied("Only customers can add items to cart.")
+        
+        # Get or create cart for current user
+        cart, _ = Cart.objects.get_or_create(user=self.request.user)
+        serializer.save(cart=cart)
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Restrict to current user's cart items
+        return CartItem.objects.filter(cart__user=self.request.user)
+
+    def perform_update(self, serializer):
+        # Optional: Check that the user owns the cart
+        if serializer.instance.cart.user != self.request.user:
+            raise PermissionDenied("You can only update your own cart items.")
+        serializer.save()
