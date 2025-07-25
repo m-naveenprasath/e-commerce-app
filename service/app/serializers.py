@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Category, Product, Cart, CartItem, Order, OrderItem
+from .models import User, Category, Product, Cart, CartItem, Order, OrderItem, ShippingAddress
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
 
@@ -93,6 +93,14 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['id', 'user', 'items']
 
+class ShippingAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShippingAddress
+        fields = [
+            'id', 'full_name', 'phone_number', 'address_line1', 'address_line2',
+            'city', 'state', 'postal_code', 'country', 'is_default'
+        ]
+
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
 
@@ -103,7 +111,18 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
     user = UserSerializer(read_only=True)
+    shipping_address = ShippingAddressSerializer(read_only=True)
+
+    # Accept this field in POST requests
+    shipping_address_id = serializers.PrimaryKeyRelatedField(
+        queryset=ShippingAddress.objects.all(),
+        write_only=True,
+        source='shipping_address'  # this links it to model field
+    )
 
     class Meta:
         model = Order
-        fields = ['id', 'user', 'created_at', 'status', 'items']
+        fields = [
+            'id', 'user', 'created_at', 'status',
+            'shipping_address', 'shipping_address_id', 'items'
+        ]

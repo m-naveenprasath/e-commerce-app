@@ -47,13 +47,6 @@ const CategoryList = () => {
             >
               <span className="text-lg font-medium text-gray-700">{category.name}</span>
               <div className="flex gap-4">
-                <Link
-                  to={`/categories/${category.id}/edit`}
-                  className="text-blue-600 hover:text-blue-800 flex items-center text-sm"
-                >
-                  <Pencil className="w-4 h-4 mr-1" />
-                  Edit
-                </Link>
                 <button
                   onClick={() => handleDelete(category.id)}
                   className="text-red-600 hover:text-red-800 flex items-center text-sm"

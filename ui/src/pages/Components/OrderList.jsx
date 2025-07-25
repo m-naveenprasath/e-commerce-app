@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import generatePDF from "../../utils/GeneratePDF";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -10,6 +11,11 @@ const OrderList = () => {
       .then((res) => setOrders(res.data))
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);
+
+  const handleDownload = (order) => {
+    generatePDF(order);
+  };
+
 
   return (
     <div className="p-6 px-4 sm:px-6">
@@ -40,7 +46,7 @@ const OrderList = () => {
                 {order.user?.email || "Unknown"}
               </div>
 
-              {/* Product Items with Image */}
+              {/* Product Items */}
               <div className="mt-2 space-y-2">
                 {order.items.map((item) => (
                   <div
@@ -65,6 +71,14 @@ const OrderList = () => {
               <div className="mt-4 text-sm text-blue-600 font-semibold">
                 Status: {order.status}
               </div>
+
+              {/* 📄 Download Receipt Button */}
+              <button
+                onClick={() => handleDownload(order)}
+                className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              >
+                📄 Download Receipt
+              </button>
             </div>
           ))}
         </div>
