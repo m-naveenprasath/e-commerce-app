@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'app',
+    # 'app.apps.AppConfig'
 ]
 
 REST_FRAMEWORK = {
@@ -48,9 +52,15 @@ REST_FRAMEWORK = {
     ),
 }
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",  # React frontend
+# ]
+
+# CORS config
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # React frontend
+    "http://localhost:3000",  # frontend container
 ]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -140,3 +150,20 @@ AUTH_USER_MODEL = 'app.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6378/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+# Email settings (production)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
