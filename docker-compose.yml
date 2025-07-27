@@ -10,7 +10,7 @@ services:
   backend:
     build: ./service
     container_name: EC-SERVICE
-    command: gunicorn service.wsgi:application --bind 0.0.0.0:8000
+    command: sh entrypoint.sh
     volumes:
       - ./service:/app
     ports:

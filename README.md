@@ -6,3 +6,8 @@
 docker-compose build
 docker compose up -d
 ```
+
+If you want to remove any volumes (e.g., DB data, Redis cache):
+```
+docker-compose down -v
+```

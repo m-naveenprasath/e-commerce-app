@@ -1,16 +1,20 @@
-# Stage 1: Build React/Vite App
-FROM node:18-alpine as build
+# Build Stage: Use Node 18.12.1
+FROM node:18.12.1-alpine as builder
 
 WORKDIR /app
+
 COPY . .
+
 RUN npm install
 RUN npm run build
 
-# Stage 2: Serve with nginx
+# Serve with Nginx
 FROM nginx:alpine
 
-# Copy build output
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy built frontend from builder to Nginx public folder
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose port 80 for browser
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
