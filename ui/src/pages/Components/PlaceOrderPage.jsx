@@ -230,7 +230,6 @@ const PlaceOrderPage = () => {
               total={total}
               onSuccess={() => {
                 setShowPayment(false);
-                // navigate("/orders"); // Redirect to orders page
               }}
             />
           </div>

@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     setUser(null);
-    window.location.href = "/login"; // Works globally
+    window.location.href = "/"; // Works globally
   };
 
   useEffect(() => {

@@ -33,9 +33,20 @@ const CartPage = ({ refreshSignal, setCartCount }) => {
         setCartItems([]);
       }
     } catch (err) {
-      console.error("Failed to fetch cart:", err);
-      alert("❌ Failed to load cart.");
-    } finally {
+      const errorMessage = err.response?.data?.detail;
+      const status = err.response?.status;
+
+      if (
+        status === 401 ||
+        errorMessage === "Authentication credentials were not provided."
+      ) {
+        setCartCount(0); // not logged in
+      } else {
+        console.error("Error fetching cart count:", err);
+        alert("❌ Failed to load cart.");
+      }
+    }
+     finally {
       setLoading(false);
     }
   };

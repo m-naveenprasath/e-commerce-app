@@ -27,13 +27,13 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/orders" element={<OrderList />} />
+      <Route path="/" element={<LandingPage />} />
 
       <Route
-        path="/"
+        path="/orders"
         element={
           <PrivateRoute>
-            <LandingPage />
+            <OrderList />
           </PrivateRoute>
         }
       />

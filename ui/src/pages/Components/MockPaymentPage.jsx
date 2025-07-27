@@ -32,7 +32,7 @@ const MockPaymentPage = ({ selectedAddressId, total, onSuccess }) => {
 
       setTimeout(() => {
         // 🎉 Navigate to receipt page
-        navigate("/orders");
+        navigate("/");
         onSuccess?.();
       }, 4500);
     } catch (err) {
