@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: ecommerce_user
+      POSTGRES_PASSWORD: ecommerce_pass
+    ports:
+      - "5433:5432"
+
   redis:
     image: redis:7
     container_name: redis
@@ -10,7 +22,7 @@ services:
   backend:
     build: ./service
     container_name: EC-SERVICE
-    command: sh entrypoint.sh
+    command: sh /app/entrypoint.sh
     volumes:
       - ./service:/app
     ports:
@@ -18,6 +30,7 @@ services:
     env_file:
       - ./service/.env
     depends_on:
+      - postgres
       - redis
 
   frontend:
@@ -27,3 +40,6 @@ services:
       - "3000:80"
     depends_on:
       - backend
+
+volumes:
+  postgres_data:

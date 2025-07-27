@@ -1,18 +1,23 @@
 #!/bin/sh
 
-set -e
+set -e  # Exit immediately if a command exits with a non-zero status
 
-echo "Apply database migrations"
-python manage.py makemigrations
-python manage.py migrate
+echo "Applying database migrations..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
 
-echo "Create superuser if not exists"
+echo "Creating superuser if it doesn't exist..."
 python manage.py shell << END
 from django.contrib.auth import get_user_model
 User = get_user_model()
-if not User.objects.filter(email="${DJANGO_SUPERUSER_EMAIL}").exists():
-    User.objects.create_superuser(email="${DJANGO_SUPERUSER_EMAIL}", password="${DJANGO_SUPERUSER_PASSWORD}")
+email = "${DJANGO_SUPERUSER_EMAIL}"
+password = "${DJANGO_SUPERUSER_PASSWORD}"
+if not User.objects.filter(email=email).exists():
+    User.objects.create_superuser(email=email, password=password)
 END
 
-echo "Start server"
+# echo "Collecting static files..."
+# python manage.py collectstatic --noinput
+
+echo "Starting Gunicorn server..."
 gunicorn service.wsgi:application --bind 0.0.0.0:8000
