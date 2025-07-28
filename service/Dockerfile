@@ -5,17 +5,21 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Add this before copying the rest
+# Install netcat (for waiting on PostgreSQL)
 RUN apt-get update && \
     apt-get install -y netcat-openbsd && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Copy all project files
 COPY . .
 
+# Make sure entrypoint.sh is executable
 RUN chmod +x entrypoint.sh
 
-CMD ["sh", "entrypoint.sh"]
+# Set the entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
