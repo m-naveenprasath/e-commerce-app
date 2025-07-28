@@ -28,8 +28,6 @@ services:
     build: ./service
     container_name: EC-SERVICE
     command: sh /app/entrypoint.sh
-    volumes:
-      - ./service:/app
     ports:
       - "8000:8000"
     env_file:
