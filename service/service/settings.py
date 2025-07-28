@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'app',
-    # 'app.apps.AppConfig'
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {
@@ -111,7 +111,7 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', 'ecommerce_user'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'ecommerce_pass'),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'PORT': os.environ.get('DB_PORT', 'DB_PORT'),
     }
 }
 
@@ -163,7 +163,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6378/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 

@@ -1,12 +1,16 @@
 #!/bin/sh
 
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e
 
-echo "Applying database migrations..."
-python manage.py makemigrations --noinput
+echo "Waiting for PostgreSQL to start..."
+until nc -z postgres 5432; do
+  sleep 1
+done
+
+echo "PostgreSQL is up. Applying database migrations..."
 python manage.py migrate --noinput
 
-echo "Creating superuser if it doesn't exist..."
+echo "Creating superuser if not exists..."
 python manage.py shell << END
 from django.contrib.auth import get_user_model
 User = get_user_model()
