@@ -1,2 +1,0 @@
-# Ensure all shell scripts use LF endings
-*.sh text eol=lf

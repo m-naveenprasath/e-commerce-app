@@ -33,6 +33,7 @@ services:
     env_file:
       - ./service/.env
     environment:
+      DJANGO_ROLE: backend
       DJANGO_SUPERUSER_EMAIL: admin@example.com
       DJANGO_SUPERUSER_PASSWORD: admin123
     depends_on:

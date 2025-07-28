@@ -11,3 +11,8 @@ If you want to remove any volumes (e.g., DB data, Redis cache):
 ```
 docker-compose down -v
 ```
+
+IF FIND ERROR
+```
+dos2unix ./service/entrypoint.sh
+```
