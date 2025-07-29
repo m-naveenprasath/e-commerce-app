@@ -3,20 +3,12 @@
 
 
 ``` 
+git clone https://github.com/m-naveenprasath/e-commerce-app.git
+cd e-commerce-app
 docker-compose build
 docker compose up -d
 ```
 
-If you want to remove any volumes (e.g., DB data, Redis cache):
-```
-docker-compose down -v
-```
-
-IF FIND ERROR
-```
-dos2unix ./service/entrypoint.sh
-```
----
 
 ## 📘 API Documentation
 
