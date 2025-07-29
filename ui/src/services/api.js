@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:8000/api";
+// const baseURL = "http://localhost:8000/api"; //Local
+const baseURL = "dev5.digi360.ai"; //server
 
 const instance = axios.create({
   baseURL,

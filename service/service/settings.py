@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
 
 # CORS config
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # frontend container
+    "http://localhost:3000", "https://naveenprasathofficial.netlify.app", # frontend container
 ]
 
 
