@@ -54,7 +54,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Image */}
-      <div className="hidden md:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: `url('https://cdn-felem.nitrocdn.com/mCFFtBbbIOwHIDBOyBVuDXJuWiymyPku/assets/images/optimized/rev-a389fd0/www.adfactory.mx/wp-content/uploads/ecom.png')` }}>
+      <div className="hidden md:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: `url('https://www.quickeselling.com/wp-content/uploads/2024/01/businessman-using-laptop-with-online-shopping-concept-marketplace-website-with-virtual-interface-online-shopping-cart-part-network-online-shopping-business-with-selecting-shopping-cart.jpg')` }}>
         {/* You can use public/assets/ecommerce-banner.jpg */}
       </div>
 

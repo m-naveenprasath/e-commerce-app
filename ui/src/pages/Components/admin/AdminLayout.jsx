@@ -19,21 +19,27 @@ const AdminLayout = () => {
     <div className="flex h-screen bg-gray-100 overflow-hidden">
       {/* Sidebar */}
       <aside
-        className={`fixed md:static z-20 top-0 left-0 h-full bg-white border-r shadow-sm transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 transition-transform duration-200 ease-in-out w-64`}
+        className={`fixed md:static z-20 top-0 left-0 h-full bg-white border-r shadow-sm transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 transition-transform duration-200 ease-in-out w-64`}
       >
-        <div className="p-6 text-xl font-bold text-gray-800 border-b">
-          🛍️ Admin Panel
+        <div className="p-6 border-b">
+          <div className="flex items-center space-x-2 text-indigo-600 font-bold text-xl">
+            <Package className="w-6 h-6" />
+            <span className="hidden sm:inline">ShopNow.com</span>
+          </div>
+          <div className="text-sm font-bold text-gray-700 mt-1 ml-8">
+            🛍️ Admin Panel
+          </div>
         </div>
+
+
         <nav className="flex flex-col gap-1 p-4 text-gray-700">
           {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-100 transition ${
-                pathname === item.to ? "bg-blue-200 font-semibold text-blue-800" : ""
-              }`}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-100 transition ${pathname === item.to ? "bg-blue-200 font-semibold text-blue-800" : ""
+                }`}
               onClick={() => setSidebarOpen(false)}
             >
               {item.icon}

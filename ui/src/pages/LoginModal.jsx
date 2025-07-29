@@ -53,10 +53,10 @@ const LoginModal = ({ onClose }) => {
   }, [user, navigate, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-lg flex w-full max-w-4xl overflow-hidden relative">
         {/* Left Image / Promo */}
-        <div className="hidden md:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: `url('https://cdn-felem.nitrocdn.com/mCFFtBbbIOwHIDBOyBVuDXJuWiymyPku/assets/images/optimized/rev-a389fd0/www.adfactory.mx/wp-content/uploads/ecom.png')` }}></div>
+        <div className="hidden md:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: `url('https://www.quickeselling.com/wp-content/uploads/2024/01/businessman-using-laptop-with-online-shopping-concept-marketplace-website-with-virtual-interface-online-shopping-cart-part-network-online-shopping-business-with-selecting-shopping-cart.jpg')` }}></div>
 
         {/* Right Form */}
         <div className="w-full md:w-1/2 p-8 relative">
@@ -68,8 +68,21 @@ const LoginModal = ({ onClose }) => {
           </button>
 
           <h2 className="text-3xl font-bold text-center mb-4">
-            {isLogin ? "Login to ShopNow.com" : "Create Your Account"}
+            {isLogin ? (
+              <>
+                Login to{" "}
+                <span className="inline-flex items-center space-x-1 text-indigo-600 font-bold">
+                  {/* <Package className="w-5 h-5" /> */}
+                  <span>ShopNow.com</span>
+                </span>
+              </>
+            ) : (
+              <>
+                Create Your Account
+              </>
+            )}
           </h2>
+
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
