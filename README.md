@@ -42,6 +42,7 @@ Download here:
 ---
 
 ## 📂 Project Structure
+```
 e-commerce-app/
 ├── app/ # Django backend
 │ ├── media/
@@ -65,3 +66,4 @@ e-commerce-app/
 ├── .editorconfig
 ├── .gitignore
 └── README.md
+```
