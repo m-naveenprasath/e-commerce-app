@@ -161,8 +161,8 @@ e-commerce-app/
     💳 Mock payment flow (Stripe-ready)
 
 ## Bonus Features
-    🧾 PDF invoice generation (optional/configurable)
-
+    🧾 PDF invoice generation 
+    
 ### 📧 Contact
     For any queries or feedback, feel free to connect:
     Naveen Prasath
