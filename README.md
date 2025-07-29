@@ -1,7 +1,18 @@
 # 🛒 E-Commerce App
 
 ### 🔗 Live Preview / Demo
-🌐 Live Demo: [ShopNow](https://naveenprasathofficial.netlify.app/)
+
+🌐 **Live Demo**: [ShopNow](https://naveenprasathofficial.netlify.app/)
+
+> 🧪 Try out the application with the demo credentials below:
+
+#### 👤 Customer Login
+- 📧 Email: `naveenprasathofficial.work@gmail.com`
+- 🔑 Password: `naveen123`
+
+#### 🛠️ Admin Login
+- 📧 Email: `admin@example.com`
+- 🔑 Password: `admin123`
 
 A full-stack e-commerce web application built with **Django (DRF)** and **React (Vite + Tailwind CSS)**. Features include:
 
@@ -42,13 +53,20 @@ docker-compose up -d
 ```
 3. **Access the app:**
 
-Frontend: http://localhost:3000
+- 🖥️ Frontend: [http://localhost:3000](http://localhost:3000)
+- 🔙 Backend API: [http://localhost:8000/api/](http://localhost:8000/api/)
 
-Backend API: http://localhost:8000/api/
-
-✅ Ensure ports 80 and 8000 are available on your machine.
+✅ Ensure ports **3000** and **8000** are available on your machine.
 
 ---
+
+### 🔐 Default Admin Login (for local testing)
+
+- 📧 Email: `admin@example.com`
+- 🔑 Password: `admin123`
+
+> You can log in using the frontend or the `/login` 
+
 
 ### 📘 API Documentation
 
