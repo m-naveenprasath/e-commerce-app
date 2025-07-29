@@ -27,7 +27,7 @@ services:
   backend:
     build: ./service
     container_name: EC-SERVICE
-    command: sh /app/entrypoint.sh
+    command: ["/bin/sh", "-c", "/app/entrypoint.sh"]
     ports:
       - "8000:8000"
     env_file:

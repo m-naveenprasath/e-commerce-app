@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from corsheaders.defaults import default_headers
 
 load_dotenv()
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-bp_wbsfxq!^ci2$slgs-4skcbu#7we08(@=^03pyyy$*tw60q_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ "dev5.digi360.ai",  ]
 
 
 # Application definition
@@ -52,11 +53,20 @@ REST_FRAMEWORK = {
     ),
 }
 
+CORS_ALLOW_ALL_ORIGINS = False  # Don't use True here
+
 # CORS config
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", "https://naveenprasathofficial.netlify.app", # frontend container
 ]
 
+# ✅ Needed when using Authorization headers (like JWT)
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'Authorization',
+]
+
+# ✅ Needed if you use cookies or Authorization headers
+CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

@@ -1,6 +1,6 @@
 #!/bin/sh
-
-set -e
+echo "✅ Entrypoint works"
+exec "$@"
 
 echo "Waiting for PostgreSQL to start..."
 until nc -z postgres 5432; do
