@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-bp_wbsfxq!^ci2$slgs-4skcbu#7we08(@=^03pyyy$*tw60q_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ "dev5.digi360.ai",  ]
+ALLOWED_HOSTS = [ "dev5.digi360.ai","localhost", ]
 
 
 # Application definition
