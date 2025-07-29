@@ -76,6 +76,13 @@ const PlaceOrderPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <button
+        onClick={() => navigate("/")}
+        className="sticky top-4 z-10 mb-6 px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-100 shadow-sm transition"
+      >
+        ← Back to Home
+      </button>
+
       <h2 className="text-3xl font-bold mb-4">🧾 Review Your Order</h2>
 
       <div className="mb-6">

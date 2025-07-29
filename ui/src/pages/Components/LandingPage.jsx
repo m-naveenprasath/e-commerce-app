@@ -8,6 +8,8 @@ import Navbar from "./NavBar";
 import LoginModal from "../LoginModal";
 import { useDebounce } from "../../utils/useDebounce";
 import { AuthContext } from "../../context/AuthContext";
+import { Carousel } from "react-responsive-carousel";
+import toast from "react-hot-toast"; // at top
 
 const LandingPage = () => {
   const [categories, setCategories] = useState([]);
@@ -101,10 +103,26 @@ const LandingPage = () => {
       await api.post("/cart/add/", { product: productId, quantity: 1 });
       fetchCartCount();
       setCartRefreshSignal((prev) => prev + 1);
+
+      toast.custom((t) => (
+        <div
+          className={`${t.visible ? "animate-enter" : "animate-leave"
+            } max-w-sm w-full bg-indigo-600 text-white shadow-lg rounded-lg pointer-events-auto flex items-center px-4 py-3`}
+        >
+          <div className="text-2xl animate-bounce mr-3">🛒</div>
+          <div className="flex-1">
+            <p className="text-sm font-semibold">Added to Cart</p>
+            <p className="text-xs opacity-90">Your item has been added!</p>
+          </div>
+        </div>
+      ));
     } catch (err) {
       console.error("Error adding to cart:", err);
+      toast.error("Failed to add to cart.");
     }
   };
+
+
 
   const handleCategoryClick = (categoryId) => {
     document
@@ -148,6 +166,30 @@ const LandingPage = () => {
         onScrollTop={handleScrollToTop}
         setShowLoginModal={setShowLoginModal}
       />
+
+      {/* 🖼️ Carousel Banner */}
+      <div className="max-w-7xl mx-auto mt-4">
+        <Carousel
+          showThumbs={false}
+          infiniteLoop
+          autoPlay
+          interval={4000}
+          showStatus={false}
+          dynamicHeight={false}
+          className="rounded-xl overflow-hidden shadow"
+        >
+          <div>
+            <img src="/images/banner1.png" alt="New Arrivals Banner" className="w-full max-h-[450px] object-fill bg-white rounded" />
+          </div>
+          <div>
+            <img src="/images/banner2.png" alt="New Arrivals Banner" className="w-full max-h-[450px] object-fill bg-white rounded" />
+          </div>
+          <div>
+            <img src="/images/banner3.png" alt="Exclusive Deals Banner" className="w-full max-h-[450px] object-fill bg-white rounded" />
+          </div>
+        </Carousel>
+      </div>
+
 
       {/* 🛍️ Product Listings */}
       <div className="p-6 max-w-7xl mx-auto">

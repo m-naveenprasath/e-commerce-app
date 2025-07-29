@@ -44,7 +44,7 @@ const Navbar = ({
         {/* Left: Logo */}
         <div className="flex items-center space-x-2 text-indigo-600 font-bold text-xl">
           <Package className="w-6 h-6" />
-          <span className="hidden sm:inline">ShopSmart</span>
+          <span className="hidden sm:inline">ShopNow.com</span>
         </div>
 
         {/* Mobile Menu Toggle */}

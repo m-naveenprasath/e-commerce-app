@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import RoleBasedRoute from "./utils/RoleBasedRoute";
@@ -25,6 +26,15 @@ import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
+    <div className="font-sans">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            fontFamily: 'Nunito, sans-serif',
+          },
+        }}
+      />
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<LandingPage />} />
@@ -105,6 +115,7 @@ function App() {
       {/* 404 Page Not Found Route */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </div>
   );
 }
 

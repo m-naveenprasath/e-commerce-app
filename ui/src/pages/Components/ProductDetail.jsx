@@ -2,8 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
-const ProductDetail = ({ productId: propProductId, inModal = false, onCartUpdate = () => {} }) => {
+const ProductDetail = ({ productId: propProductId, inModal = false, onCartUpdate = () => { } }) => {
   const { id: routeId } = useParams(); // for route usage
   const id = propProductId || routeId;
 
@@ -28,18 +29,37 @@ const ProductDetail = ({ productId: propProductId, inModal = false, onCartUpdate
   }, [id]);
 
   const handleAddToCart = async () => {
+    if (!user) {
+      toast.error("Please log in to add items to your cart.");
+      return;
+    }
+
     try {
       await api.post("cart/add/", {
         product: product.id,
         quantity,
       });
-      alert("✅ Product added to cart!");
-      onCartUpdate(); // 👈 trigger cart refresh + count update
+
+      toast.custom((t) => (
+        <div
+          className={`${t.visible ? "animate-enter" : "animate-leave"
+            } max-w-sm w-full bg-indigo-600 text-white shadow-lg rounded-lg pointer-events-auto flex items-center px-4 py-3`}
+        >
+          <div className="text-2xl animate-bounce mr-3">🛒</div>
+          <div className="flex-1">
+            <p className="text-sm font-semibold">Added to Cart</p>
+            <p className="text-xs opacity-90">Your item has been added!</p>
+          </div>
+        </div>
+      ));
+
+      onCartUpdate(); // Trigger refresh
     } catch (err) {
       console.error("Failed to add to cart:", err);
-      alert("❌ Something went wrong!");
+      toast.error("❌ Something went wrong!");
     }
   };
+
 
   if (loading) return <div className="p-4">Loading...</div>;
   if (!product) return <div className="p-4">Product not found.</div>;
@@ -64,21 +84,24 @@ const ProductDetail = ({ productId: propProductId, inModal = false, onCartUpdate
             ₹{product.price}
           </p>
 
-          <label className="block mb-2 font-medium">Quantity</label>
-          <input
-            type="number"
-            value={quantity}
-            min="1"
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            className="w-20 px-2 py-1 border rounded mb-4"
-          />
+          <div className="mb-6">
+  <label className="block mb-2 font-medium">Quantity</label>
+  <input
+    type="number"
+    value={quantity}
+    min="1"
+    onChange={(e) => setQuantity(Number(e.target.value))}
+    className="w-24 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+</div>
 
-          <button
-            onClick={handleAddToCart}
-            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-          >
-            Add to Cart 🛒
-          </button>
+<button
+  onClick={handleAddToCart}
+  className="px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium"
+>
+  Add to Cart 🛒
+</button>
+
         </div>
       </div>
     </div>

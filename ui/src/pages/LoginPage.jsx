@@ -3,13 +3,15 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { login, user } = useContext(AuthContext);
+  const { login, register, user } = useContext(AuthContext); // Ensure register is available
+  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Redirect if already logged in
     if (user) {
       if (user.is_admin) {
         navigate("/admin");
@@ -21,41 +23,98 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await login(email, password);
-    if (!success) {
-      alert("Invalid credentials");
+    setError("");
+
+    if (isLogin) {
+      const success = await login(email, password);
+      if (!success) {
+        setError("Invalid credentials");
+      }
+    } else {
+      // Registration mode
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
+
+      const result = await register(email, password);
+      if (!result.success) {
+        setError(result.message || "Registration failed");
+        return;
+      }
+
+      // Auto login after successful registration
+      const loginSuccess = await login(email, password);
+      if (!loginSuccess) {
+        setError("Login failed after registration");
+      }
     }
-    // Don't navigate here — let useEffect handle it when `user` updates
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            required
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-          >
-            Login
-          </button>
-        </form>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Image */}
+      <div className="hidden md:flex w-1/2 bg-cover bg-center" style={{ backgroundImage: `url('https://cdn-felem.nitrocdn.com/mCFFtBbbIOwHIDBOyBVuDXJuWiymyPku/assets/images/optimized/rev-a389fd0/www.adfactory.mx/wp-content/uploads/ecom.png')` }}>
+        {/* You can use public/assets/ecommerce-banner.jpg */}
+      </div>
+
+      {/* Right Form */}
+      <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-gray-100 px-6 py-12">
+        <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-lg">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            {isLogin ? "Welcome Back" : "Create an Account"}
+          </h2>
+          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              required
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border rounded-md"
+            />
+            {!isLogin && (
+              <input
+                type="password"
+                required
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-4 py-2 border rounded-md"
+              />
+            )}
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
+            >
+              {isLogin ? "Login" : "Register"}
+            </button>
+          </form>
+
+          <p className="mt-4 text-center text-sm text-gray-600">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+            <button
+              type="button"
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setError("");
+              }}
+              className="text-indigo-600 font-semibold hover:underline"
+            >
+              {isLogin ? "Register" : "Login"}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

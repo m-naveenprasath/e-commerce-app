@@ -28,6 +28,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (email, password) => {
+    try {
+      const res = await axios.post("/register/", {
+        email,
+        password,
+        password2: password,     // your serializer requires password2
+        is_customer: true,       // mark user as customer
+      });
+      setUser(res.data.user);
+      return { success: true };
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const errors = error.response.data;
+        const message = Object.values(errors).flat().join(" ");
+        return { success: false, message };
+      }
+      return { success: false, message: "Registration failed" };
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
@@ -57,7 +77,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, register, loading }}>
       {children}
     </AuthContext.Provider>
   );

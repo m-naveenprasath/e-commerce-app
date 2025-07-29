@@ -1,6 +1,7 @@
 // ShippingAddressForm.jsx
 import { useState } from "react";
 import api from "../../services/api";
+import toast from "react-hot-toast";
 
 const ShippingAddressForm = ({ onSuccess, onClose,  initialData = null }) => {
 const [form, setForm] = useState(
@@ -31,9 +32,15 @@ const handleSubmit = async (e) => {
     const res = initialData
       ? await api.patch(`/addresses/${initialData.id}/`, form)
       : await api.post("/addresses/", form);
-    alert("✅ Address saved");
+    toast.success("Address saved successfully!");
     onSuccess?.(res.data);
     onClose?.();
+        // ✅ Reload page only on PATCH
+    if (initialData) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 500); // Delay to let toast show
+    }
   } catch (err) {
     console.error("❌ Failed to save address", err);
     alert("❌ Error saving address");
