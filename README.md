@@ -54,8 +54,8 @@ Backend API: http://localhost:8000/api/
 
 Manual documentation of all available API endpoints, including request/response formats and examples.
 
-- [📄 API Documentation (PDF)](./docs/Ecommerce_API_Documentation.pdf)
 - [📄 API Documentation (Word)](./docs/Ecommerce_API_Documentation.docx)
+- [📄 API Documentation (PDF)](./docs/Ecommerce_API_Documentation.pdf)
 
 ---
 ### 🗂️ Project Schema
@@ -69,7 +69,7 @@ Manual documentation of all available API endpoints, including request/response 
 
   Download here:
     
-    - [📄 Project Schema (PDF)](./docs/Ecommerce_Project_Schema.pdf)
+  - [📄 Project Schema (PDF)](./docs/Ecommerce_Project_Schema.pdf)
 ---
 
 ### 🧪 Testing
