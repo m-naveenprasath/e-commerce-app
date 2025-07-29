@@ -16,11 +16,30 @@ IF FIND ERROR
 ```
 dos2unix ./service/entrypoint.sh
 ```
+---
+
 ## 📘 API Documentation
 
-You can download the full API documentation here:
+Manually written usage guide for all API endpoints:
 
-👉 [Download Ecommerce_API_Documentation.docx](./docs/Ecommerce_API_Documentation.docx)
+- [📄 API Documentation (PDF)](./docs/Ecommerce_API_Documentation.pdf)
+- [📄 API Documentation (Word)](./docs/Ecommerce_API_Documentation.docx)
+
+---
+
+## 🗂️ Project Schema
+
+Detailed schema of the entire system including:
+
+- Database Models
+- Relationships (ER Diagram)
+- Roles & Permissions (if included)
+
+Download here:
+
+- [📄 Project Schema (PDF)](./docs/Ecommerce_Project_Schema.pdf)
+
+---
 
 ## 📂 Project Structure
 e-commerce-app/
