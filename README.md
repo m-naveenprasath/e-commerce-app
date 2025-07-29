@@ -58,7 +58,6 @@ docker-compose up -d
 
 ✅ Ensure ports **3000** and **8000** are available on your machine.
 
----
 
 ### 🔐 Default Admin Login (for local testing)
 
@@ -67,6 +66,7 @@ docker-compose up -d
 
 > You can log in using the frontend or the `/login` 
 
+---
 
 ### 📘 API Documentation
 
