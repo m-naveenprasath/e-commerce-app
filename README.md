@@ -2,7 +2,7 @@
 
 ### 🔗 Live Preview / Demo
 
-🌐 **Live Demo**: [ShopNow](https://naveenprasathofficial.netlify.app/)
+🌐 **Live Demo**: [ShopNow.com](https://naveenprasathofficial.netlify.app/)
 
 > 🧪 Try out the application with the demo credentials below:
 
