@@ -93,8 +93,8 @@ Manual documentation of all available API endpoints, including request/response 
 ### 🧪 Testing
 ## Run Django unit tests:
 ```
-cd app
-pytest
+cd .\service\
+python manage.py test
 ```
 
 ### 📂 Project Structure
