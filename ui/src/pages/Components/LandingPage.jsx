@@ -168,7 +168,7 @@ const LandingPage = () => {
       />
 
       {/* 🖼️ Carousel Banner */}
-      <div className="max-w-7xl mx-auto mt-4">
+      {/* <div className="max-w-7xl mx-auto mt-4">
         <Carousel
           showThumbs={false}
           infiniteLoop
@@ -188,7 +188,7 @@ const LandingPage = () => {
             <img src="/images/banner3.png" alt="Exclusive Deals Banner" className="w-full max-h-[450px] object-fill bg-white rounded" />
           </div>
         </Carousel>
-      </div>
+      </div> */}
 
 
       {/* 🛍️ Product Listings */}

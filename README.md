@@ -29,9 +29,24 @@ This project was built as part of a take-home assignment.
 
 ---
 
-## 🚀 Getting Started
+### 🚀 Getting Started
 
-### 🐳 Docker Setup (Recommended)
+## 📄 Manual Setup Guide (Download)
+### For developers who prefer running the project manually (without full Docker), use this setup guide:
+
+[📥 Download Manual Setup Guide (Word)](./docs/Short_Manual_Setup_Ecommerce.docx)
+
+This guide covers:
+
+✅ Spinning up PostgreSQL using Docker
+
+✅ Django backend setup
+
+✅ React frontend setup
+
+✅ .env configuration details
+
+## 🐳 Docker Setup (Recommended)
 
 #### Prerequisites
 
@@ -100,7 +115,7 @@ python manage.py test
 ### 📂 Project Structure
 ```
 e-commerce-app/
-├── app/                  # Django backend (DRF, JWT, Celery, Stripe/Mock)
+├── service/                  # Django backend (DRF, JWT, Celery, Stripe/Mock)
 │   ├── media/
 │   ├── service/          # Django project directory
 │   ├── Dockerfile
