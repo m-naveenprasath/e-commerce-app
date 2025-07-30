@@ -115,7 +115,7 @@ python manage.py test
 ### 📂 Project Structure
 ```
 e-commerce-app/
-├── app/                  # Django backend (DRF, JWT, Celery, Stripe/Mock)
+├── service/                  # Django backend (DRF, JWT, Celery, Stripe/Mock)
 │   ├── media/
 │   ├── service/          # Django project directory
 │   ├── Dockerfile
