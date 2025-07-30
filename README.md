@@ -29,7 +29,7 @@ This project was built as part of a take-home assignment.
 
 ---
 
-## 🚀 Getting Started
+### 🚀 Getting Started
 
 ## 📄 Manual Setup Guide (Download)
 ### For developers who prefer running the project manually (without full Docker), use this setup guide:
