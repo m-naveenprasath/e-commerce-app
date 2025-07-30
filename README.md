@@ -31,8 +31,8 @@ This project was built as part of a take-home assignment.
 
 ## 🚀 Getting Started
 
-### 📄 Manual Setup Guide (Download)
-## For developers who prefer running the project manually (without full Docker), use this setup guide:
+## 📄 Manual Setup Guide (Download)
+### For developers who prefer running the project manually (without full Docker), use this setup guide:
 
 [📥 Download Manual Setup Guide (Word)](./docs/Short_Manual_Setup_Ecommerce.docx)
 
@@ -46,7 +46,7 @@ This guide covers:
 
 ✅ .env configuration details
 
-### 🐳 Docker Setup (Recommended)
+## 🐳 Docker Setup (Recommended)
 
 #### Prerequisites
 
