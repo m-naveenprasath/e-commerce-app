@@ -28,6 +28,9 @@ A full-stack e-commerce web application built with **Django (DRF)** and **React 
 This project was built as part of a take-home assignment.
 
 ---
+
+## 🚀 Getting Started
+
 ### 📄 Manual Setup Guide (Download)
 ## For developers who prefer running the project manually (without full Docker), use this setup guide:
 
@@ -42,8 +45,6 @@ This guide covers:
 ✅ React frontend setup
 
 ✅ .env configuration details
-
-## 🚀 Getting Started
 
 ### 🐳 Docker Setup (Recommended)
 
