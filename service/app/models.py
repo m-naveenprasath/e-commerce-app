@@ -51,12 +51,12 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()  # ✅ attach the custom manager
+    objects = UserManager()  
 
     def __str__(self):
         return self.email
 
-# 4. Product, Cart, Order Models
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
