@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = [ "dev5.digi360.ai", "localhost", ]
+ALLOWED_HOSTS = [ "dev5.digi360.ai", "localhost","136.113.233.247" ]
 
 
 # Application definition
